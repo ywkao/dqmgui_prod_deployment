@@ -7,7 +7,7 @@
 # Target python version. This is important for downloading
 # compatible packages for PyPI. Make sure it's the same
 # with the python version that is running on the target machine.
-PYTHON_VERSION=3.8
+PYTHON_VERSION=3.9
 
 # Tag to use for getting the layouts and manage/deploy scripts
 # See: https://github.com/dmwm/deployment/tags
@@ -18,7 +18,7 @@ DMWM_GIT_TAG=HG2606a
 # DQMGUI tag to use, see https://github.com/cms-DQM/dqmgui_prod/tags
 # Overriden by GitHub actions secrets.
 DQMGUI_GIT_URL=ssh://git@gitlab.cern.ch:7999/ykao/dqmgui.git
-DQMGUI_GIT_TAG=ywk/test-layout-profile-v6.32-20261026
+DQMGUI_GIT_TAG=ywk/test-layout-profile-cpp17-20261026
 # other options: ywk/test-layout-profile-20261026
 
 # JSROOT
@@ -28,5 +28,4 @@ JSROOT_GIT_TAG=6.3.4
 # ROOT
 # Overriden by GitHub actions secrets.
 ROOT_GIT_URL=https://github.com/root-project/root/
-ROOT_GIT_TAG=v6-32-18
-# target version v6-36-09
+ROOT_GIT_TAG=v6-36-14

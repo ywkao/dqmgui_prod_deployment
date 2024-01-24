@@ -304,7 +304,7 @@ compile_classlib() {
     cd "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/src/classlib-3.1.3"
 
     #INCLUDE_DIRS="$INCLUDE_DIRS:/usr/include/lzo" make -j `nproc`
-    make -j "$(nproc)" CXXFLAGS="-Wno-error=extra -ansi -pedantic -W -Wall -Wno-long-long -Werror"
+    make -j "$(nproc)" CXXFLAGS="-Wno-error=extra -ansi -pedantic -W -Wall -Wno-long-long -Wno-cast-function-type -Werror"
 
     # Move the compiled library in the libs dir
     mv "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/src/classlib-3.1.3/.libs/libclasslib.so" "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/lib/libclasslib.so"
@@ -320,7 +320,7 @@ install_classlib() {
 
     # Apply code patches I found on cmsdist. The 7th one is ours, and has some extra needed fixes.
     cd $CLASSLIB_TMP_DIR
-    for i in 1 2 3 4 5 6 7 8; do
+    for i in 1 2 3 4 5 6 7 8 9; do
         patch -p1 <"$SCRIPT_DIR/classlib/patches/0${i}.patch"
     done
 
@@ -530,7 +530,7 @@ compile_dqmgui() {
     cd "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/cms/dqmgui/$DQMGUI_GIT_TAG/128/"
     # Links to python libraries so that the build command can find them
     if [ ! -L "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/lib/libboost_python.so" ]; then
-        ln -s /usr/lib64/libboost_python3.so "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/lib/libboost_python.so"
+        ln -s /usr/lib64/libboost_python39.so "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/lib/libboost_python.so"
     fi
 
     if [ ! -L "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/external/lib/libpython${PYTHON_VERSION}.so" ]; then
@@ -578,6 +578,10 @@ install_dqmgui() {
 
     # Temporary directory to clone GUI into
     tar -xzf "$SCRIPT_DIR/dqmgui/dqmgui.tar.gz" -C "${TMP_BASE_PATH}"
+
+    # Apply code patches for AlmaLinux 9 compatibility
+    (cd ${DQMGUI_TMP_DIR}/src/cpp/DQM && protoc --cpp_out=. *.proto)
+    (cd ${DQMGUI_TMP_DIR} && patch -p1 <"$SCRIPT_DIR/dqmgui/patches/01.patch")
 
     # Move dqmgui source and bin files to appropriate directory
     if [ -d "$INSTALLATION_DIR/$DMWM_GIT_TAG/sw/cms/dqmgui/$DQMGUI_GIT_TAG" ]; then
