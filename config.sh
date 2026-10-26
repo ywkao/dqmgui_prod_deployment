@@ -13,12 +13,13 @@ PYTHON_VERSION=3.8
 # See: https://github.com/dmwm/deployment/tags
 # Overriden by GitHub actions secrets.
 DMWM_GIT_URL=https://github.com/dmwm/deployment
-DMWM_GIT_TAG=HG2605a
+DMWM_GIT_TAG=HG2606a
 
 # DQMGUI tag to use, see https://github.com/cms-DQM/dqmgui_prod/tags
 # Overriden by GitHub actions secrets.
-DQMGUI_GIT_URL=https://github.com/ywkao/dqmgui_prod
-DQMGUI_GIT_TAG=10.5.1.3
+DQMGUI_GIT_URL=ssh://git@gitlab.cern.ch:7999/ykao/dqmgui.git
+DQMGUI_GIT_TAG=ywk/test-layout-profile-v6.32-20261026
+# other options: ywk/test-layout-profile-20261026
 
 # JSROOT
 JSROOT_GIT_URL=https://github.com/root-project/jsroot
@@ -27,4 +28,5 @@ JSROOT_GIT_TAG=6.3.4
 # ROOT
 # Overriden by GitHub actions secrets.
 ROOT_GIT_URL=https://github.com/root-project/root/
-ROOT_GIT_TAG=v6-36-09
+ROOT_GIT_TAG=v6-32-18
+# target version v6-36-09
